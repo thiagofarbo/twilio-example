@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1k3qbw4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="cancelPurchaseOrder" name="Cancel Purchase Order" isExecutable="true">
+    <bpmn:endEvent id="Event_1e3dsuf">
+      <bpmn:incoming>Flow_1lk1882</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_134tqhv" name="Cancel Purchase Order" camunda:class="org.camunda.bpm.getstarted.loanapproval.delegate.UpdatePurchaseOrderDelegate">
+      <bpmn:incoming>Flow_1m3t6d5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lk1882</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0v3j5aq">
+        <bpmn:targetRef>DataStoreReference_1s2g7ax</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:dataStoreReference id="DataStoreReference_1s2g7ax" name="Purchase Database" />
+    <bpmn:sequenceFlow id="Flow_1lk1882" sourceRef="Activity_134tqhv" targetRef="Event_1e3dsuf" />
+    <bpmn:sequenceFlow id="Flow_1m3t6d5" sourceRef="Event_04ggq05" targetRef="Activity_134tqhv" />
+    <bpmn:startEvent id="Event_04ggq05" name="Start Cancel Purchase Event">
+      <bpmn:outgoing>Flow_1m3t6d5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_1evesbf" name="Save log error" camunda:delegateExpression="${customerErrorLogDelegate}">
+      <bpmn:incoming>Flow_1mk0ibc</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1ci417n" attachedToRef="Activity_134tqhv">
+      <bpmn:outgoing>Flow_1mk0ibc</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_005g7f7" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1mk0ibc" sourceRef="Event_1ci417n" targetRef="Activity_1evesbf" />
+  </bpmn:process>
+  <bpmn:message id="Message_1b4tq9p" name="cancelPurchaseOrder" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="cancelPurchaseOrder">
+      <bpmndi:BPMNEdge id="Flow_1lk1882_di" bpmnElement="Flow_1lk1882">
+        <di:waypoint x="380" y="290" />
+        <di:waypoint x="482" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m3t6d5_di" bpmnElement="Flow_1m3t6d5">
+        <di:waypoint x="188" y="290" />
+        <di:waypoint x="280" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mk0ibc_di" bpmnElement="Flow_1mk0ibc">
+        <di:waypoint x="330" y="232" />
+        <di:waypoint x="330" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1q8ovp7_di" bpmnElement="Activity_134tqhv">
+        <dc:Bounds x="280" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1s2g7ax_di" bpmnElement="DataStoreReference_1s2g7ax">
+        <dc:Bounds x="305" y="408" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="308" y="465" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1e3dsuf_di" bpmnElement="Event_1e3dsuf">
+        <dc:Bounds x="482" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cu3rqe_di" bpmnElement="Event_04ggq05">
+        <dc:Bounds x="152" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="133" y="315" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1evesbf_di" bpmnElement="Activity_1evesbf">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ci417n_di" bpmnElement="Event_1ci417n">
+        <dc:Bounds x="312" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0v3j5aq_di" bpmnElement="DataOutputAssociation_0v3j5aq">
+        <di:waypoint x="330" y="330" />
+        <di:waypoint x="330" y="408" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

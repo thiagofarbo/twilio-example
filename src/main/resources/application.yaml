@@ -1,0 +1,21 @@
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+  filter:
+    create: All tasks
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: product
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 15672
+    exchange: subscriptions_purchased
+    queue: globo_subscriptions
+    routingkey: subscription.purchased
