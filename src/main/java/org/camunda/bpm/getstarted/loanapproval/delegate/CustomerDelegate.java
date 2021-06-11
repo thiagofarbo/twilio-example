@@ -22,11 +22,18 @@ public class CustomerDelegate implements JavaDelegate {
 
         try {
 
-//            purchase.getCustomer().setPurchase(purchase);
+            final Customer customer = purchase.getCustomer();
 
-            final Customer customer = customerRepository.save(purchase.getCustomer());
+//            customer.setPurchase(purchase);
 
-            purchase.setCustomer(customer);
+            customer.setProduct(purchase.getProduct());
+
+//            purchase.setCustomer(customer);
+
+            final Customer customerSaved = customerRepository.save(customer);
+
+            purchase.setCustomer(customerSaved);
+            purchase.setProduct(customer.getProduct());
 
             execution.setVariable("purchase", purchase);
 

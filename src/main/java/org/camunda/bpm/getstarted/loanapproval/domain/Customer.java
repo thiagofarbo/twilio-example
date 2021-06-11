@@ -25,6 +25,8 @@ public class Customer implements Serializable {
 
     private String id;
 
+    private String name;
+
     private String cpf;
 
     private String address;
@@ -35,7 +37,7 @@ public class Customer implements Serializable {
 
     private String messageId;
 
-    private Purchase purchase;
+    private Product product;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonSerialize(using = LocalDateTimeSerializer.class)

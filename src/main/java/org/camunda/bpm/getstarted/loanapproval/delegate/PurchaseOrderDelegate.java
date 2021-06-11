@@ -53,6 +53,7 @@ public class PurchaseOrderDelegate implements JavaDelegate {
 
        final Customer customer = Customer.builder()
                 .cpf("95207759000")
+                .name("Thiago Correa")
                 .phone("112211222")
                 .address("Rua Luis Scott 165, AP41 Torre Mare")
                 .zipCode("06445555")
