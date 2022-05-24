@@ -22,6 +22,8 @@ public class UpdatePurchaseOrderDelegate implements JavaDelegate {
 
         final Purchase purchaseCanceled = service.cancelPurchaseOrder(purchase);
 
+        execution.setVariable("purchase", purchaseCanceled);
+
         log.warn(String.format("Order has been canceled %s", purchaseCanceled));
     }
 }

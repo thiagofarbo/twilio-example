@@ -35,7 +35,7 @@ public class PurchaseOrderDelegate implements JavaDelegate {
 
         purchase.setOrderId(UUID.randomUUID());
         purchase.setProduct(product);
-        purchase.setStatus(OrderStatus.ORDERED);
+        purchase.setStatus(OrderStatus.CANCELED);
         purchase.setCustomer(builderCustomer());
 
         return purchase;
